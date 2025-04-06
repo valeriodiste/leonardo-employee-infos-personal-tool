@@ -48,12 +48,13 @@ $(document).ready(function () {
 			// Show the loading state
 			setInfosLoadingState(true);
 			// Make the AJAX request to get the infos JSON
+			let timeout_minutes = 15;
 			$.ajax({
 				url: infos_url,
 				type: "GET",
 				dataType: "json",
 				// Set the timeout to 10 minutes (300000 milliseconds)
-				timeout: 600000,
+				timeout: timeout_minutes * 60 * 1000,
 				success: function (data) {
 					console.log("Data received:", data);
 					// If the request is successful, redirect to the "infos.html" page with the JSON data in the URL parameters

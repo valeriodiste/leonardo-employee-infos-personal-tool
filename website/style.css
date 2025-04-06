@@ -198,13 +198,45 @@ input.small-input {
 @media screen and (max-width: 1100px) {
 	/* Mobile website */
 	html, body {
-		font-size: 44px;
+		font-size: 50px;
+	}
+	#main {
+		/* Show content at the top */
+		justify-content: flex-start;
+		zoom: 1.5;
+		transform: translate(calc(-50% / (1.5 * 2)), 0);
+		/* Center the content */
+		/* Calculate a padding based on the scale */
 	}
 	.main-section {
-		max-width: 95%;
+		max-width: 57.5%;
 		font-size: 0.9em;
 	}
 	.internal-section {
 		padding: 20px 10px;
+	}
+	.credentials-section {
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.credentials-section > input {
+		margin: 0.25em 0;
+	}
+	.credentials-section > input[type="button"] {
+		width: 10.5em;
+	}
+	.account-hours-section {
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.account-hours-section > label {
+		margin: 0.25em 0;
+	}
+	.tool-infos-section {
+		font-size: 0.8em;
 	}
 }
