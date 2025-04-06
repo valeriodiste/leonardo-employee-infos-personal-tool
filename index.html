@@ -1,0 +1,29 @@
+<!-- Empty page to redirect to ./website/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<script>
+		// Get the urls parameters string and redirect to the website
+		let urlParams = new URLSearchParams(window.location.search);
+		let currentUrl = window.location.href;
+		let newUrl = currentUrl;
+		if (newUrl.includes("?")) {
+			newUrl = newUrl.split('?')[0];
+		}
+		if (newUrl.includes('/index.html')) {
+			newUrl = newUrl.replace(/\/index\.html/, '/website/index.html');
+		} else {
+			if (!newUrl.endsWith('/')) newUrl += '/';
+			newUrl += 'website/index.html';
+		}
+		if (urlParams.toString() !== '') {
+			newUrl += '?' + urlParams.toString();
+		}
+		console.log('Redirecting to: ' + newUrl);
+		// Redirect to the new URL
+		window.location.href = newUrl;
+	</script>
+</body>
+</html>

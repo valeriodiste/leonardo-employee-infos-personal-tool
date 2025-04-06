@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- No cors policy -->
+	<title>Job Infos Dashboard</title>
+	<link rel="stylesheet" href="style.css">
+	
+</head>
+<body>
+	<div id="main">
+		<div id="infos-loading" style="display: none;"></div>
+		<div id="hours-infos" class="main-section">
+			<div class="internal-section tool-infos-section">
+				<div>Get job infos for Leonardo S.p.A. from HR-NEXT</div>
+			</div>
+			<div class="internal-section">
+				<input type="text" id="username" class="med-input" placeholder="Username">
+				<input type="text" id="password" class="med-input" placeholder="Password">
+				<input type="button" value="GET INFOS" id="get-infos">
+			</div>
+			<div class="internal-section">
+				<!-- Time input in 24 hours format -->
+				 <label for="entrance-hours">
+					<p>Entrata (Oggi)</p>
+					<input type="time" id="entrance-hours" placeholder="Entrata (Oggi)" min="07:45" max="20:00"/>
+				</label>
+				<label for="flexibility-hours">
+					<p>Saldo Flessibilità</p>
+					<input type="text" id="flexibility-hours" class="small-input" placeholder="+00:00"/>
+				</label>
+			</div>
+			<div class="internal-section hours-results-section">
+				<div>
+					<div>Uscita (8 ore)</div>
+					<div id="exit-hours-8">??:??</div>
+				</div>
+				<div>
+					<div>Uscita (6 ore)</div>
+					<div id="exit-hours-6">??:??</div>
+				</div>
+				<div>
+					<div>Uscita (Azzera Saldo)</div>
+					<div id="exit-hours-0">??:??</div>
+				</div>
+			</div>
+			<div class="internal-section"></div>
+		</div>
+	</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="script.js"></script>
+</html>
