@@ -7,6 +7,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
+import requests
+import webdriver_manager
 import time
 import json
 import os
@@ -243,7 +245,14 @@ if __name__ == "__main__":
 	username = None
 	password = None
 	try:
-		credentials_file = "credentials.json"
+		credentials_file = None
+		try:
+			current_script_directory = os.path.dirname(os.path.abspath(__file__))
+			credentials_file = "credentials.json"
+			credentials_file = os.path.join(current_script_directory, credentials_file)
+		except Exception as e:
+			# __file__ is not defined in Google Colab, so we need to use the current working directory
+			credentials_file = "credentials.json"
 		with open(credentials_file, "r") as file:
 			credentials = json.load(file)
 			username = credentials["username"]
@@ -263,5 +272,6 @@ if __name__ == "__main__":
 			print(f"Error reading credentials: {e}")
 			username = input("Enter username: ")
 			password = input("Enter password: ")
+
 	# Get the information
 	get_infos(username, password)
