@@ -146,6 +146,7 @@ $(document).ready(function () {
 			if (newValue) {
 				enterHours = newValue;
 			} else {
+				alert(`Invalid enter hours format: ${enterHours}`);
 				formatIsValid = false;
 			}
 		}
@@ -165,6 +166,7 @@ $(document).ready(function () {
 			if (newValue) {
 				flexibilityHours = sign + newValue;
 			} else {
+				alert(`Invalid flexibility hours format: ${flexibilityHours}`);
 				formatIsValid = false;
 			}
 		}
