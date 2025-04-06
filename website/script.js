@@ -130,11 +130,12 @@ $(document).ready(function () {
 	// Function to update the results section
 	function refreshResultsSection() {
 		// Get the values from the inputs
-		let enterHours = $("#enter-hours").val();	// input type="time"
+		let enterHours = $("#entrance-hours").val(); // string of the form "HH:mm"
 		let flexibilityHours = $("#flexibility-hours").val(); // string of the form "HH:mm", "+HH:mm" or "-HH:mm"
+		console.log(`Enter hours: ${enterHours}, Flexibility hours: ${flexibilityHours}`);
 		// Check if the enter hours and flexibility hours are in the correct format (HH:mm)
 		let formatIsValid = true;
-		if (!enterHours.match(/^\d{2}:\d{2}$/)) {
+		if (enterHours && !enterHours.match(/^\d{2}:\d{2}$/)) {
 			// Try to recover the enter hours from the input type="time"
 			let newValue = undefined;
 			let enterHoursArray = enterHours.split(":");
@@ -146,7 +147,7 @@ $(document).ready(function () {
 			if (newValue) {
 				enterHours = newValue;
 			} else {
-				alert(`Invalid enter hours format: ${enterHours}`);
+				// alert(`Invalid enter hours format: ${enterHours}`);
 				formatIsValid = false;
 			}
 		}
@@ -166,50 +167,49 @@ $(document).ready(function () {
 			if (newValue) {
 				flexibilityHours = sign + newValue;
 			} else {
-				alert(`Invalid flexibility hours format: ${flexibilityHours}`);
+				// alert(`Invalid flexibility hours format: ${flexibilityHours}`);
 				formatIsValid = false;
 			}
 		}
 		if (formatIsValid) {
-			try {
+			// try {
+			// update the sections below
+			let launchBreakDurationMinutes = 45;
+			// Calculate the exit times as the enter hours plus launchBreakDurationMinutes minutes and 8 hours or 6 hours
+			// NOTE: time should use the 24 hours format
+			let exit_8_hours = new Date();
+			exit_8_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
+			exit_8_hours.setMinutes(exit_8_hours.getMinutes() + launchBreakDurationMinutes + 480); // 8 hours = 480 minutes
+			$("#exit-hours-8").text(new Date(exit_8_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
+			let exit_6_hours = new Date();
+			exit_6_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
+			exit_6_hours.setMinutes(exit_6_hours.getMinutes() + launchBreakDurationMinutes + 360); // 6 hours = 360 minutes
+			$("#exit-hours-6").text(new Date(exit_6_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
+			// Calculate the exit that brings the flexibility hours to 0
+			let exit_0_hours = new Date();
+			exit_0_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
+			exit_0_hours.setMinutes(exit_0_hours.getMinutes() + launchBreakDurationMinutes + 480); // 8 hours = 480 minutes
+			let flexibilityHoursInt = 0;
+			let flexibilityMinutesInt = 0;
+			if (flexibilityHours.includes("-")) {
+				// If the flexibility hours are negative, subtract them from the exit time (subtract hours and minutes)
+				let flexibilityHoursArray = flexibilityHours.split(":");
+				flexibilityHoursInt = parseInt(flexibilityHoursArray[0].replace("-", ""));
+				flexibilityMinutesInt = parseInt(flexibilityHoursArray[1]);
 
-				// update the sections below
-				let launchBreakDurationMinutes = 45;
-				// Calculate the exit times as the enter hours plus launchBreakDurationMinutes minutes and 8 hours or 6 hours
-				// NOTE: time should use the 24 hours format
-				let exit_8_hours = new Date();
-				exit_8_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
-				exit_8_hours.setMinutes(exit_8_hours.getMinutes() + launchBreakDurationMinutes + 480); // 8 hours = 480 minutes
-				$("#exit-hours-8").text(new Date(exit_8_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
-				let exit_6_hours = new Date();
-				exit_6_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
-				exit_6_hours.setMinutes(exit_6_hours.getMinutes() + launchBreakDurationMinutes + 360); // 6 hours = 360 minutes
-				$("#exit-hours-6").text(new Date(exit_6_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
-				// Calculate the exit that brings the flexibility hours to 0
-				let exit_0_hours = new Date();
-				exit_0_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
-				exit_0_hours.setMinutes(exit_0_hours.getMinutes() + launchBreakDurationMinutes + 480); // 8 hours = 480 minutes
-				let flexibilityHoursInt = 0;
-				let flexibilityMinutesInt = 0;
-				if (flexibilityHours.includes("-")) {
-					// If the flexibility hours are negative, subtract them from the exit time (subtract hours and minutes)
-					let flexibilityHoursArray = flexibilityHours.split(":");
-					flexibilityHoursInt = parseInt(flexibilityHoursArray[0].replace("-", ""));
-					flexibilityMinutesInt = parseInt(flexibilityHoursArray[1]);
-
-				} else {
-					// If the flexibility hours are positive, add them to the exit time (add hours and minutes)
-					let flexibilityHoursArray = flexibilityHours.split(":");
-					flexibilityHoursInt = -1 * parseInt(flexibilityHoursArray[0]);
-					flexibilityMinutesInt = -1 * parseInt(flexibilityHoursArray[1]);
-				}
-				exit_0_hours.setHours(exit_0_hours.getHours() + flexibilityHoursInt);
-				exit_0_hours.setMinutes(exit_0_hours.getMinutes() + flexibilityMinutesInt);
-				// Format the exit time to HH:mm
-				$("#exit-hours-0").text(new Date(exit_0_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
-			} catch (error) {
-				alert("Error calculating the exit times:\n" + error.message);
+			} else {
+				// If the flexibility hours are positive, add them to the exit time (add hours and minutes)
+				let flexibilityHoursArray = flexibilityHours.split(":");
+				flexibilityHoursInt = -1 * parseInt(flexibilityHoursArray[0]);
+				flexibilityMinutesInt = -1 * parseInt(flexibilityHoursArray[1]);
 			}
+			exit_0_hours.setHours(exit_0_hours.getHours() + flexibilityHoursInt);
+			exit_0_hours.setMinutes(exit_0_hours.getMinutes() + flexibilityMinutesInt);
+			// Format the exit time to HH:mm
+			$("#exit-hours-0").text(new Date(exit_0_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
+			// } catch (error) {
+			// 	// alert("Error calculating the exit times:\n" + error.message);
+			// }
 		} else {
 			// If the format is not valid, show all hours as "??:??"
 			$("#exit-hours-8").text("??:??");
@@ -218,8 +218,8 @@ $(document).ready(function () {
 		}
 	}
 
-	// On change onto either #enter-hours or #flexibility-hours, update the results section
-	$("#enter-hours").change(refreshResultsSection);
+	// On change onto either #entrance-hours or #flexibility-hours, update the results section
+	$("#entrance-hours").change(refreshResultsSection);
 	$("#flexibility-hours").change(refreshResultsSection);
 
 });
