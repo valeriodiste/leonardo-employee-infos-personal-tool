@@ -75,17 +75,17 @@ $(document).ready(function () {
 						*/
 						let jsonResponse = data;
 						// For debug, edit the jsonResponse to actually have other values
-						jsonResponse = {
-							"days_ago": 0,
-							"entrata": "08:32",
-							"saldo_ore": "-00:46",
-							"user": "NOME COGNOME",
-							"opzioni_uscita": {
-								"6_hours": "15:18",
-								"8_hours": "17:18",
-								"azzera_saldo_ore": "18:04",
-							},
-						}
+						// jsonResponse = {
+						// 	"days_ago": 0,
+						// 	"entrata": "08:32",
+						// 	"saldo_ore": "-00:46",
+						// 	"user": "NOME COGNOME",
+						// 	"opzioni_uscita": {
+						// 		"6_hours": "15:18",
+						// 		"8_hours": "17:18",
+						// 		"azzera_saldo_ore": "18:04",
+						// 	},
+						// }
 						// Get the needed data from the JSON response
 						let user = jsonResponse.user;
 						let entranceTime = jsonResponse.entrata;
