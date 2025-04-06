@@ -145,6 +145,9 @@ input.med-input {
 input.small-input {
 	max-width: 5em;
 }
+input[type="time"].small-input {
+	max-width: 7em;
+}
 .tool-infos-section {
 	width: 100%;
 	height: 100%;
@@ -238,5 +241,14 @@ input.small-input {
 	}
 	.tool-infos-section {
 		font-size: 0.8em;
+	}
+	.hours-results-section {
+		font-size: 0.85em;
+	}
+	.hours-results-section > div > div:first-child {
+		width: 60%;
+	}
+	.hours-results-section > div > div:last-child {
+		width: 40%;
 	}
 }
