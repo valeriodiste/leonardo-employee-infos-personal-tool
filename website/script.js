@@ -135,10 +135,38 @@ $(document).ready(function () {
 		// Check if the enter hours and flexibility hours are in the correct format (HH:mm)
 		let formatIsValid = true;
 		if (!enterHours.match(/^\d{2}:\d{2}$/)) {
-			formatIsValid = false;
+			// Try to recover the enter hours from the input type="time"
+			let newValue = undefined;
+			let enterHoursArray = enterHours.split(":");
+			if (enterHoursArray.length == 2) {
+				if ((enterHoursArray[0].length == 1 || enterHoursArray[0].length == 2) && enterHoursArray[1].length == 2) {
+					newValue = (enterHoursArray[0].length == 1 ? "0" + enterHoursArray[0] : enterHoursArray[0]) + ":" + enterHoursArray[1];
+				}
+			}
+			if (newValue) {
+				enterHours = newValue;
+			} else {
+				formatIsValid = false;
+			}
 		}
 		if (flexibilityHours && !flexibilityHours.match(/^\+?\d{2}:\d{2}$/) && !flexibilityHours.match(/^\-\d{2}:\d{2}$/)) {
-			formatIsValid = false;
+			// Try to recover the flexibility hours from the input type="time"
+			let newValue = undefined;
+			let flexibilityHoursArray = flexibilityHours.split(":");
+			let sign = flexibilityHoursArray[0].includes("-") ? "-" : "+";
+			if (sign == "-") {
+				flexibilityHoursArray[0] = flexibilityHoursArray[0].replace("-", "");
+			}
+			if (flexibilityHoursArray.length == 2) {
+				if ((flexibilityHoursArray[0].length == 1 || flexibilityHoursArray[0].length == 2) && flexibilityHoursArray[1].length == 2) {
+					newValue = (flexibilityHoursArray[0].length == 1 ? "0" + flexibilityHoursArray[0] : flexibilityHoursArray[0]) + ":" + flexibilityHoursArray[1];
+				}
+			}
+			if (newValue) {
+				flexibilityHours = sign + newValue;
+			} else {
+				formatIsValid = false;
+			}
 		}
 		if (formatIsValid) {
 			// update the sections below
