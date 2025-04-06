@@ -169,40 +169,45 @@ $(document).ready(function () {
 			}
 		}
 		if (formatIsValid) {
-			// update the sections below
-			let launchBreakDurationMinutes = 45;
-			// Calculate the exit times as the enter hours plus launchBreakDurationMinutes minutes and 8 hours or 6 hours
-			// NOTE: time should use the 24 hours format
-			let exit_8_hours = new Date();
-			exit_8_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
-			exit_8_hours.setMinutes(exit_8_hours.getMinutes() + launchBreakDurationMinutes + 480); // 8 hours = 480 minutes
-			$("#exit-hours-8").text(new Date(exit_8_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
-			let exit_6_hours = new Date();
-			exit_6_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
-			exit_6_hours.setMinutes(exit_6_hours.getMinutes() + launchBreakDurationMinutes + 360); // 6 hours = 360 minutes
-			$("#exit-hours-6").text(new Date(exit_6_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
-			// Calculate the exit that brings the flexibility hours to 0
-			let exit_0_hours = new Date();
-			exit_0_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
-			exit_0_hours.setMinutes(exit_0_hours.getMinutes() + launchBreakDurationMinutes + 480); // 8 hours = 480 minutes
-			let flexibilityHoursInt = 0;
-			let flexibilityMinutesInt = 0;
-			if (flexibilityHours.includes("-")) {
-				// If the flexibility hours are negative, subtract them from the exit time (subtract hours and minutes)
-				let flexibilityHoursArray = flexibilityHours.split(":");
-				flexibilityHoursInt = parseInt(flexibilityHoursArray[0].replace("-", ""));
-				flexibilityMinutesInt = parseInt(flexibilityHoursArray[1]);
+			try {
 
-			} else {
-				// If the flexibility hours are positive, add them to the exit time (add hours and minutes)
-				let flexibilityHoursArray = flexibilityHours.split(":");
-				flexibilityHoursInt = -1 * parseInt(flexibilityHoursArray[0]);
-				flexibilityMinutesInt = -1 * parseInt(flexibilityHoursArray[1]);
+				// update the sections below
+				let launchBreakDurationMinutes = 45;
+				// Calculate the exit times as the enter hours plus launchBreakDurationMinutes minutes and 8 hours or 6 hours
+				// NOTE: time should use the 24 hours format
+				let exit_8_hours = new Date();
+				exit_8_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
+				exit_8_hours.setMinutes(exit_8_hours.getMinutes() + launchBreakDurationMinutes + 480); // 8 hours = 480 minutes
+				$("#exit-hours-8").text(new Date(exit_8_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
+				let exit_6_hours = new Date();
+				exit_6_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
+				exit_6_hours.setMinutes(exit_6_hours.getMinutes() + launchBreakDurationMinutes + 360); // 6 hours = 360 minutes
+				$("#exit-hours-6").text(new Date(exit_6_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
+				// Calculate the exit that brings the flexibility hours to 0
+				let exit_0_hours = new Date();
+				exit_0_hours.setHours(enterHours.split(":")[0], enterHours.split(":")[1], 0, 0);
+				exit_0_hours.setMinutes(exit_0_hours.getMinutes() + launchBreakDurationMinutes + 480); // 8 hours = 480 minutes
+				let flexibilityHoursInt = 0;
+				let flexibilityMinutesInt = 0;
+				if (flexibilityHours.includes("-")) {
+					// If the flexibility hours are negative, subtract them from the exit time (subtract hours and minutes)
+					let flexibilityHoursArray = flexibilityHours.split(":");
+					flexibilityHoursInt = parseInt(flexibilityHoursArray[0].replace("-", ""));
+					flexibilityMinutesInt = parseInt(flexibilityHoursArray[1]);
+
+				} else {
+					// If the flexibility hours are positive, add them to the exit time (add hours and minutes)
+					let flexibilityHoursArray = flexibilityHours.split(":");
+					flexibilityHoursInt = -1 * parseInt(flexibilityHoursArray[0]);
+					flexibilityMinutesInt = -1 * parseInt(flexibilityHoursArray[1]);
+				}
+				exit_0_hours.setHours(exit_0_hours.getHours() + flexibilityHoursInt);
+				exit_0_hours.setMinutes(exit_0_hours.getMinutes() + flexibilityMinutesInt);
+				// Format the exit time to HH:mm
+				$("#exit-hours-0").text(new Date(exit_0_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
+			} catch (error) {
+				alert("Error calculating the exit times:\n" + error.message);
 			}
-			exit_0_hours.setHours(exit_0_hours.getHours() + flexibilityHoursInt);
-			exit_0_hours.setMinutes(exit_0_hours.getMinutes() + flexibilityMinutesInt);
-			// Format the exit time to HH:mm
-			$("#exit-hours-0").text(new Date(exit_0_hours).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
 		} else {
 			// If the format is not valid, show all hours as "??:??"
 			$("#exit-hours-8").text("??:??");
