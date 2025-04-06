@@ -254,4 +254,27 @@ input[type="time"].small-input {
 	.hours-results-section > div > div:last-child {
 		width: 40%;
 	}
+	#infos-loading {
+		width: 100vw;
+		height: 100vh;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: #000000bb;
+		z-index: 1000;
+	}
+	#infos-loading::before {
+		font-size: 0.8em;
+		position: absolute;
+		top: 25%;
+		left: 50%;
+		transform: translate(-50%, calc(-25% + 20px));
+	}
+	#infos-loading::after {
+		font-size: 0.8em;
+		position: absolute;
+		top: 25%;
+		left: 50%;
+		transform: translate(-50%, calc(-25% + 55px));
+	}
 }
