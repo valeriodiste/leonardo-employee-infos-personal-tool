@@ -345,13 +345,18 @@ def get_hrnext_hours_data():
 		except Exception as e:
 			return {"error": "While recovering from a previous error, the following error occured: " + str(e)}
 
+	# Whether to recover data in case of an error via a call to a deployed web app on render.com or not
+	# NOTE: Should not try to recover data if already running on render.com...
+	recover_data = False
+
 	# Call the function to get HR NEXT data
 	try:
 		data = get_hrnext_data.get_infos(username, password)
 	except Exception as e:
 		print(f"Error retrieving data: {e}")
-		# Check if running on render.com (onrender.com) and if NOT so, call the recovery function
-		if 'onrender.com' not in os.environ.get('HOSTNAME', ''):
+		# Check if we should recover data
+		# NOTE: Should not try to recover data if already running on render.com...
+		if recover_data:
 			print("> Trying to recover missing data...")
 			data = recover_missing_data(username, password)
 		else:
