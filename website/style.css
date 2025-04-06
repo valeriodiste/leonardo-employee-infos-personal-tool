@@ -3,7 +3,7 @@ html, body {
 	padding: 0;
 	font-family: Arial, sans-serif;
 	background-color: #222222;
-	font-size: 18px;
+	font-size: 20px;
 }
 * {
 	box-sizing: border-box;
@@ -62,16 +62,17 @@ html, body {
 }
 .main-section {
 	width: 100%;
-	max-width: 500px;
-	margin: 10px 0;
+	max-width: 550px;
+	margin: 0.5em 0;
 	/* padding: 15px; */
 	display: inline-flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	background-color: #eeeeee;
-	border-radius: 10px;
+	border-radius: 0.5em;
 	color: #000000;
+	text-align: center;
 	overflow: hidden;
 	position: relative;
 }
@@ -92,11 +93,11 @@ input[type="button"] {
 	padding: 5px 10px;
 	border: 1px solid #00000050;
 	background-color: #eeeeee;
-	border-radius: 500px;
+	border-radius: 9999px;
 	color: #000000;
 	font-size: 0.8em;
 	line-height: 1.2em;
-	margin: 0 3px;
+	margin: 0 0.15em;
 	cursor: pointer;
 }
 input[type="button"]:hover {
@@ -110,20 +111,20 @@ input[type="text"] {
 	padding: 2px 5px;
 	border: 1px solid #00000050;
 	background-color: #eeeeee;
-	border-radius: 5px;
+	border-radius: 0.25em;
 	color: #000000;
 	font-size: 0.9em;
-	margin: 0 3px;
+	margin: 0 0.15em;
 }
 input[type="time"] {
 	height: 1.5em;
 	padding: 10px 5px;
 	border: 1px solid #00000050;
 	background-color: #eeeeee;
-	border-radius: 5px;
+	border-radius: 0.25em;
 	color: #000000;
 	font-size: 0.9em;
-	margin: 0 3px;
+	margin: 0 0.15em;
 }
 label {
 	font-size: 0.85em;
@@ -131,17 +132,18 @@ label {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 5px;
+	margin: 0 0.25em;
+	text-align: right;
 }
 label > p {
 	all: unset;
-	margin: 0 5px;
+	margin: 0 0.25em;
 }
 input.med-input {
-	max-width: 150px;
+	max-width: 9.25em;
 }
 input.small-input {
-	max-width: 100px;
+	max-width: 5em;
 }
 .tool-infos-section {
 	width: 100%;
@@ -192,4 +194,17 @@ input.small-input {
 	text-align: left;
 	/* background-color: #00000010; */
 	border-left: 2px solid #00000020;
+}
+@media screen and (max-width: 1100px) {
+	/* Mobile website */
+	html, body {
+		font-size: 44px;
+	}
+	.main-section {
+		max-width: 95%;
+		font-size: 0.9em;
+	}
+	.internal-section {
+		padding: 20px 10px;
+	}
 }

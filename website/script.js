@@ -52,8 +52,8 @@ $(document).ready(function () {
 				url: infos_url,
 				type: "GET",
 				dataType: "json",
-				// Set the timeout to 5 minutes (300000 milliseconds)
-				timeout: 300000,
+				// Set the timeout to 10 minutes (300000 milliseconds)
+				timeout: 600000,
 				success: function (data) {
 					console.log("Data received:", data);
 					// If the request is successful, redirect to the "infos.html" page with the JSON data in the URL parameters
