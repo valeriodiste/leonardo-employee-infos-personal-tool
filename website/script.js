@@ -43,7 +43,19 @@ $(document).ready(function () {
 		const password = $("#password").val();
 		if (username && password) {
 			// Send a request to the server to get the infos JSON based on the username and password
-			let infos_url = `https://get-leonardo-hrnext-infos.onrender.com/get_job_infos?username=${username}&password=${password}`;
+			let append_parameters_in_url = false;
+			let infos_url = `https://get-leonardo-hrnext-infos.onrender.com/get_job_infos`;
+			let requestData = null;
+			if (append_parameters_in_url) {
+				// Append the username and password to the URL as parameters
+				infos_url += `?username=${username}&password=${password}`;
+			} else {
+				requestData = {
+					username: username,
+					password: password
+				};
+			}
+			// Show the loading state
 			console.log(`Getting infos from ${infos_url}`);
 			// Show the loading state
 			setInfosLoadingState(true);
@@ -52,6 +64,7 @@ $(document).ready(function () {
 			$.ajax({
 				url: infos_url,
 				type: "GET",
+				data: requestData,
 				dataType: "json",
 				// Set the timeout to 10 minutes (300000 milliseconds)
 				timeout: timeout_minutes * 60 * 1000,
