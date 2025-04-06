@@ -275,6 +275,6 @@ input[type="time"].small-input {
 		position: absolute;
 		top: 25%;
 		left: 50%;
-		transform: translate(-50%, calc(-25% + 55px));
+		transform: translate(-50%, calc(-25% + 75px));
 	}
 }
