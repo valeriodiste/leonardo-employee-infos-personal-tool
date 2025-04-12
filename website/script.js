@@ -118,7 +118,7 @@ $(document).ready(function () {
 						} else {
 							// If the days ago is greater than 0, dont calculate the exit times
 							$("#entrance-hours").val(null);
-							$("#flexibility-hours").val(null);
+							$("#flexibility-hours").val(hoursBalance);
 							alert(`Retrieved infos for ${user} but the data is from ${daysAgo} days ago, not calculating the exit times...`);
 						}
 						// Update the results section with the entrance time and flexibility hours
@@ -223,6 +223,14 @@ $(document).ready(function () {
 			// } catch (error) {
 			// 	// alert("Error calculating the exit times:\n" + error.message);
 			// }
+			// Set the exit "warning" class to exit-hours-0 if the exit time is less than the 6 hours time
+			let exitHours0 = $("#exit-hours-0").text();
+			let exitHours6 = $("#exit-hours-6").text();
+			if (exitHours0 < exitHours6) {
+				$("#exit-hours-0").parent().addClass("warning");
+			} else {
+				$("#exit-hours-0").parent().removeClass("warning");
+			}
 		} else {
 			// If the format is not valid, show all hours as "??:??"
 			$("#exit-hours-8").text("??:??");
