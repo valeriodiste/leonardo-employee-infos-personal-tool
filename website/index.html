@@ -16,23 +16,40 @@
 		<div id="infos-loading" style="display: none;"></div>
 		<div id="hours-infos" class="main-section">
 			<div class="internal-section tool-infos-section">
-				<div>Get job infos for Leonardo S.p.A. from HR-NEXT</div>
+				<!-- <div>Get job infos for Leonardo S.p.A. from HR-NEXT</div> -->
+				<div>Calcolatore Flessibilità e Straordinari</div>
 			</div>
-			<div class="internal-section credentials-section">
-				<input type="text" id="username" class="med-input" placeholder="Username">
-				<input type="text" id="password" class="med-input" placeholder="Password">
-				<input type="button" value="GET INFOS" id="get-infos">
-			</div>
+			<!-- <div class="internal-section credentials-section">
+				<input autocomplete="off" type="text" id="username" class="med-input" placeholder="Username">
+				<input autocomplete="off" type="text" id="password" class="med-input" placeholder="Password">
+				<input autocomplete="off" type="button" value="GET INFOS" id="get-infos">
+			</div> -->
 			<div class="internal-section account-hours-section">
 				<!-- Time input in 24 hours format -->
 				 <label for="entrance-hours">
 					<p>Entrata (Oggi)</p>
-					<input type="time" id="entrance-hours" class="small-input" placeholder="Entrata (Oggi)" min="07:45" max="20:00"/>
+					<input autocomplete="off" type="time" id="entrance-hours" class="small-input" placeholder="Entrata (Oggi)" min="07:45" max="20:00"/>
 				</label>
 				<label for="flexibility-hours">
 					<p>Saldo Flessibilità</p>
-					<input type="text" id="flexibility-hours" class="small-input" placeholder="+00:00"/>
+					<input autocomplete="off" type="text" id="flexibility-hours" class="small-input" placeholder="+00:00"/>
 				</label>
+			</div>
+			<div class="internal-section account-hours-section">
+				<label for="extra-work-hours">
+					<p>Straordinari</p>
+					<input autocomplete="off" type="text" id="extra-work-hours" class="small-input" placeholder="00:00"/>
+				</label>
+				<label for="other-hours">
+					<p>Altro</p>
+					<input autocomplete="off" type="text" id="other-hours" class="small-input" placeholder="+00:00"/>
+				</label>
+			</div>
+			<div class="internal-section hours-results-section flex-results-section">
+				<div>
+					<div>Flessibilità Reale</div>
+					<div id="flexibility-hours-real">+??:??</div>
+				</div>
 			</div>
 			<div class="internal-section hours-results-section">
 				<div>
@@ -46,7 +63,7 @@
 				<div>
 					<div>Uscita (FLEX)</div>
 					<div id="exit-hours-0">??:??</div>
-				</div>
+				</div>				
 			</div>
 			<div class="internal-section"></div>
 		</div>

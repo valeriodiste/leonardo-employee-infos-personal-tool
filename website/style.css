@@ -87,7 +87,7 @@ body {
 	align-items: center;
 	position: relative;
 }
-.internal-section:nth-child(2n + 1) {
+.internal-section:nth-child(2n) {
 	background-color: #00000020;
 }
 input[type="button"] {
@@ -120,7 +120,8 @@ input[type="text"] {
 }
 input[type="time"] {
 	height: 1.5em;
-	padding: 10px 5px;
+	/* padding: 10px 5px; */
+	padding: 0px 5px;
 	border: 1px solid #00000050;
 	background-color: #eeeeee;
 	border-radius: 0.25em;
@@ -148,7 +149,7 @@ input.small-input {
 	max-width: 5em;
 }
 input[type="time"].small-input {
-	max-width: 7em;
+	max-width: 7.5em;
 }
 .tool-infos-section {
 	width: 100%;
@@ -199,6 +200,12 @@ input[type="time"].small-input {
 	text-align: left;
 	/* background-color: #00000010; */
 	border-left: 2px solid #00000020;
+}
+.flex-results-section > div > div:last-child {
+	border-left: 2px solid #eeeeee !important
+}
+.flex-results-section > div:last-child {
+	color: unset !important;
 }
 .warning {
 	color: #ff0000 !important;
