@@ -230,11 +230,6 @@ $(document).ready(function () {
 			// Calculate the total flexibility hours and minutes
 			let totalFlexibilityHours = totalFlexibility > 0 ? Math.floor(totalFlexibility / 60) : Math.ceil(totalFlexibility / 60);
 			let totalFlexibilityMinutes = totalFlexibility > 0 ? totalFlexibility % 60 : -1 * (Math.abs(totalFlexibility) % 60);
-			// Fix possible issues (NOTE: this is a quick and dirty fix, but it works for now)
-			// let raw_flex_mins = flexibility.sign * (flexibility.hours * 60 + flexibility.minutes);
-			// let raw_extra_mins = extraWork.sign * (extraWork.hours * 60 + extraWork.minutes);
-			// let raw_other_mins = other.sign * (other.hours * 60 + other.minutes);
-			// if (totalFlexibilityHours < 0) totalFlexibilityHours += 1;
 			// Format the total flexibility hours and minutes to HH:mm
 			let totalFlexibilityString = (totalFlexibilityHours < 0 ? "-" : "+") + Math.abs(totalFlexibilityHours).toString().padStart(2, "0") + ":" + Math.abs(totalFlexibilityMinutes).toString().padStart(2, "0");
 			return totalFlexibilityString;
