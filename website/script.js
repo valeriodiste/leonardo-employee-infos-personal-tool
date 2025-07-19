@@ -228,10 +228,10 @@ $(document).ready(function () {
 			// Calculate the total flexibility in minutes
 			let totalFlexibility = (flexibility.sign * (flexibility.hours * 60 + flexibility.minutes)) - (extraWork.sign * (extraWork.hours * 60 + extraWork.minutes)) + (other.sign * (other.hours * 60 + other.minutes));
 			// Calculate the total flexibility hours and minutes
-			let totalFlexibilityHours = totalFlexibility > 0 ? Math.floor(totalFlexibility / 60) : Math.ceil(totalFlexibility / 60);
-			let totalFlexibilityMinutes = totalFlexibility > 0 ? totalFlexibility % 60 : -1 * (Math.abs(totalFlexibility) % 60);
+			let finalFlexibilityHours = (totalFlexibility > 0 ? 1 : -1) * Math.floor(Math.abs(totalFlexibility) / 60);
+			let finalFlexibilityMinutes = Math.abs(totalFlexibility) % 60;
 			// Format the total flexibility hours and minutes to HH:mm
-			let totalFlexibilityString = (totalFlexibilityHours < 0 ? "-" : "+") + Math.abs(totalFlexibilityHours).toString().padStart(2, "0") + ":" + Math.abs(totalFlexibilityMinutes).toString().padStart(2, "0");
+			let totalFlexibilityString = (totalFlexibility < 0 ? "-" : "+") + Math.abs(finalFlexibilityHours).toString().padStart(2, "0") + ":" + Math.abs(finalFlexibilityMinutes).toString().padStart(2, "0");
 			return totalFlexibilityString;
 		}
 		// If the format is valid, calculate the exit times
